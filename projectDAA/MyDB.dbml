@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MyDatabase" Class="MyDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(local);Initial Catalog=MyDatabase;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="MyDatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.bangdiem" Member="bangdiems">
+    <Type Name="bangdiem">
+      <Column Name="masv" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="mamon" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="diemhs1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="diemhs2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="diemhs3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="diemtb" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="hocky" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="namhoc" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Association Name="mon_bangdiem" Member="mon" ThisKey="mamon" OtherKey="mamon" Type="mon" IsForeignKey="true" />
+      <Association Name="sinhvien_bangdiem" Member="sinhvien" ThisKey="masv" OtherKey="masv" Type="sinhvien" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.taikhoan" Member="taikhoans">
+    <Type Name="taikhoan">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="matv" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="password1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="password2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nhom" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.giaovien" Member="giaoviens">
+    <Type Name="giaovien">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="magv" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="tengv" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="gioitinh" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ngaysinh" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="diachi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="quequan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="sdt" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="capbac" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="ngayvaolam" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Association Name="giaovien_Lop" Member="Lops" ThisKey="magv" OtherKey="magv" Type="Lop" />
+      <Association Name="giaovien_phancong" Member="phancongs" ThisKey="magv" OtherKey="magv" Type="phancong" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Lop" Member="Lops">
+    <Type Name="Lop">
+      <Column Name="malop" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="siso" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="magv" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Association Name="Lop_Lop" Member="Lop2" ThisKey="malop" OtherKey="malop" Type="Lop" Cardinality="One" />
+      <Association Name="Lop_sinhvien" Member="sinhviens" ThisKey="malop" OtherKey="malop" Type="sinhvien" />
+      <Association Name="giaovien_Lop" Member="giaovien" ThisKey="magv" OtherKey="magv" Type="giaovien" IsForeignKey="true" />
+      <Association Name="Lop_Lop" Member="Lop1" ThisKey="malop" OtherKey="malop" Type="Lop" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.mon" Member="mons">
+    <Type Name="mon">
+      <Column Name="mamon" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="tenmon" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Association Name="mon_bangdiem" Member="bangdiems" ThisKey="mamon" OtherKey="mamon" Type="bangdiem" />
+      <Association Name="mon_phancong" Member="phancongs" ThisKey="mamon" OtherKey="mamon" Type="phancong" />
+    </Type>
+  </Table>
+  <Table Name="dbo.phancong" Member="phancongs">
+    <Type Name="phancong">
+      <Column Name="mamon" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="magv" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="malop" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="hocky" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="namhoc" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Association Name="giaovien_phancong" Member="giaovien" ThisKey="magv" OtherKey="magv" Type="giaovien" IsForeignKey="true" />
+      <Association Name="mon_phancong" Member="mon" ThisKey="mamon" OtherKey="mamon" Type="mon" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sinhvien" Member="sinhviens">
+    <Type Name="sinhvien">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="masv" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="hoten" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="gioitinh" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ngaysinh" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="malop" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="diachi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="quequan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="sdt" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="bachoc" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="nienkhoa" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="sinhvien_bangdiem" Member="bangdiems" ThisKey="masv" OtherKey="masv" Type="bangdiem" />
+      <Association Name="Lop_sinhvien" Member="Lop" ThisKey="malop" OtherKey="malop" Type="Lop" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.st_changepasswordc1" Method="st_changepasswordc1">
+    <Parameter Name="username" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="passcu" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="passmoi" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.tk" Method="tk">
+    <Parameter Name="matv" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="password1" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="password2" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="nhom" Type="System.String" DbType="NVarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_changepasswordc2" Method="st_changepasswordc2">
+    <Parameter Name="username" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="passc2cu" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="passc2moi" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_checkAccountGroup" Method="st_checkAccountGroup">
+    <Parameter Name="username" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="passuser" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_chonlop" Method="st_chonlop">
+    <ElementType Name="st_chonlopResult">
+      <Column Name="malop" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="siso" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="magv" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_chonlopfromphancong" Method="st_chonlopfromphancong">
+    <Parameter Name="magv" Type="System.String" DbType="Char(10)" />
+    <ElementType Name="st_chonlopfromphancongResult">
+      <Column Name="malop" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_chonmon" Method="st_chonmon">
+    <Parameter Name="malop" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="hocky" Type="System.String" DbType="NVarChar(10)" />
+    <ElementType Name="st_chonmonResult">
+      <Column Name="mamon" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="tenmon" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_ChonSVfromLop" Method="st_ChonSVfromLop">
+    <Parameter Name="malop" Type="System.String" DbType="NChar(10)" />
+    <ElementType Name="st_ChonSVfromLopResult">
+      <Column Name="hoten" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="masv" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_DeleteAdminBangdiem" Method="st_DeleteAdminBangdiem">
+    <Parameter Name="masv" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="mamon" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_DeleteAdminBomon" Method="st_DeleteAdminBomon">
+    <Parameter Name="mamon" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_DeleteAdminLop" Method="st_DeleteAdminLop">
+    <Parameter Name="malop" Type="System.String" DbType="NChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_DeleteAdminPhanCong" Method="st_DeleteAdminPhanCong">
+    <Parameter Name="mamon" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="magv" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_DeleteAdminthongtinsinhvien" Method="st_DeleteAdminthongtinsinhvien">
+    <Parameter Name="masv" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_DeleteAdminthongtingiaovien" Method="st_DeleteAdminthongtingiaovien">
+    <Parameter Name="magv" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_DeleteTaiKhoan" Method="st_DeleteTaiKhoan">
+    <Parameter Name="matv" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_forgotpassword" Method="st_forgotpassword">
+    <Parameter Name="username" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="passc2" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="passmoi" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_getaccountinfo" Method="st_getaccountinfo">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="st_getaccountinfoResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="matv" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="password1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="password2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nhom" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_getgiaovienid" Method="st_getgiaovienid">
+    <Parameter Name="username" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_getgiaovieninfo" Method="st_getgiaovieninfo">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="st_getgiaovieninfoResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="magv" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="tengv" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="gioitinh" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ngaysinh" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="diachi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="quequan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="sdt" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="capbac" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="ngayvaolam" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_getpointofstudent" Method="st_getpointofstudent">
+    <Parameter Name="hocky" Type="System.String" DbType="Char(5)" />
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="st_getpointofstudentResult">
+      <Column Name="tenmon" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="diemhs1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="diemhs2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="diemhs3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="diemtb" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_getsinhvienid" Method="st_getsinhvienid">
+    <Parameter Name="username" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_getsinhvieninfo" Method="st_getsinhvieninfo">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="st_getsinhvieninfoResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="masv" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="hoten" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="gioitinh" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ngaysinh" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="malop" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="diachi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="quequan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="sdt" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="bachoc" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="nienkhoa" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_InsertAdminBangdiem" Method="st_InsertAdminBangdiem">
+    <Parameter Name="masv" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="mamon" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="diemhs1" Type="System.Int32" DbType="Int" />
+    <Parameter Name="diemhs2" Type="System.Int32" DbType="Int" />
+    <Parameter Name="diemhs3" Type="System.Int32" DbType="Int" />
+    <Parameter Name="diemtb" Type="System.Double" DbType="Float" />
+    <Parameter Name="hocky" Type="System.String" DbType="Char(5)" />
+    <Parameter Name="namhoc" Type="System.String" DbType="Char(5)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_InsertAdminBomon" Method="st_InsertAdminBomon">
+    <Parameter Name="mamon" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="tenmon" Type="System.String" DbType="NVarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_InsertAdminLop" Method="st_InsertAdminLop">
+    <Parameter Name="malop" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="siso" Type="System.Int32" DbType="Int" />
+    <Parameter Name="magv" Type="System.String" DbType="NChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_InsertAdminPhanCong" Method="st_InsertAdminPhanCong">
+    <Parameter Name="mamon" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="magv" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="malop" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="hocky" Type="System.String" DbType="NVarChar(10)" />
+    <Parameter Name="namhoc" Type="System.String" DbType="NVarChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_InsertAdminthongtinsinhvien" Method="st_InsertAdminthongtinsinhvien">
+    <Parameter Name="masv" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="hoten" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="gioitinh" Type="System.String" DbType="NVarChar(10)" />
+    <Parameter Name="ngaysinh" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="malop" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="diachi" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="quequan" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="sdt" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="bachoc" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="nienkhoa" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_InsertAdminthongtingiaovien" Method="st_InsertAdminthongtingiaovien">
+    <Parameter Name="magv" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="tengv" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="gioitinh" Type="System.String" DbType="NVarChar(10)" />
+    <Parameter Name="ngaysinh" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="diachi" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="quequan" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="sdt" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="capbac" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="email" Type="System.String" DbType="NVarChar(40)" />
+    <Parameter Name="ngayvaolam" Type="System.DateTime" DbType="SmallDateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_InsertTaiKhoan" Method="st_InsertTaiKhoan">
+    <Parameter Name="matv" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="password1" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="password2" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="nhom" Type="System.String" DbType="NVarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_LayBangDiemAdmin" Method="st_LayBangDiemAdmin">
+    <ElementType Name="st_LayBangDiemAdminResult">
+      <Column Name="[Họ và tên]" Member="Họ_và_tên" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Mã Sinh Viên]" Member="Mã_Sinh_Viên" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="[Mã Môn]" Member="Mã_Môn" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="[Điểm hệ số 1]" Member="Điểm_hệ_số_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Điểm hệ số 2]" Member="Điểm_hệ_số_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Điểm hệ số 3]" Member="Điểm_hệ_số_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Điểm Trung Bình]" Member="Điểm_Trung_Bình" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Học kỳ]" Member="Học_kỳ" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="[Năm học]" Member="Năm_học" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_LayBangDiemfromLop" Method="st_LayBangDiemfromLop">
+    <Parameter Name="malop" Type="System.String" DbType="NChar(10)" />
+    <ElementType Name="st_LayBangDiemfromLopResult">
+      <Column Name="[Họ và tên]" Member="Họ_và_tên" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Mã Sinh Viên]" Member="Mã_Sinh_Viên" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="[Mã Môn]" Member="Mã_Môn" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="[Tên Môn]" Member="Tên_Môn" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="[Điểm hệ số 1]" Member="Điểm_hệ_số_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Điểm hệ số 2]" Member="Điểm_hệ_số_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Điểm hệ số 3]" Member="Điểm_hệ_số_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Điểm Trung Bình]" Member="Điểm_Trung_Bình" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Học kỳ]" Member="Học_kỳ" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="[Năm học]" Member="Năm_học" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_LayBangTaiKhoan" Method="st_LayBangTaiKhoan">
+    <ElementType Name="st_LayBangTaiKhoanResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="matv" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="password1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="password2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nhom" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_LayBoMonAdmin" Method="st_LayBoMonAdmin">
+    <ElementType Name="st_LayBoMonAdminResult">
+      <Column Name="mamon" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="tenmon" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_LayBoMonfromPhancong" Method="st_LayBoMonfromPhancong">
+    <Parameter Name="malop" Type="System.String" DbType="Char(10)" />
+    <ElementType Name="st_LayBoMonfromPhancongResult">
+      <Column Name="tenmon" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="mamon" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_LayDiemforSinhvien" Method="st_LayDiemforSinhvien">
+    <Parameter Name="idsinhvien" Type="System.Int32" DbType="Int" />
+    <Parameter Name="hocky" Type="System.String" DbType="NVarChar(10)" />
+    <ElementType Name="st_LayDiemforSinhvienResult">
+      <Column Name="[Tên Môn]" Member="Tên_Môn" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="[Điểm hệ số 1]" Member="Điểm_hệ_số_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Điểm hệ số 2]" Member="Điểm_hệ_số_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Điểm hệ số 3]" Member="Điểm_hệ_số_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Điểm Trung Bình]" Member="Điểm_Trung_Bình" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_LayGiaoVienforSinhvien" Method="st_LayGiaoVienforSinhvien">
+    <Parameter Name="idsinhvien" Type="System.Int32" DbType="Int" />
+    <Parameter Name="hocky" Type="System.String" DbType="NVarChar(10)" />
+    <ElementType Name="st_LayGiaoVienforSinhvienResult">
+      <Column Name="[Tên Giáo Viên]" Member="Tên_Giáo_Viên" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Bộ Môn]" Member="Bộ_Môn" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_LayHocKyfromPhancong" Method="st_LayHocKyfromPhancong">
+    <Parameter Name="malop" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="mamon" Type="System.String" DbType="Char(10)" />
+    <ElementType Name="st_LayHocKyfromPhancongResult">
+      <Column Name="hocky" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_LayLopAdmin" Method="st_LayLopAdmin">
+    <ElementType Name="st_LayLopAdminResult">
+      <Column Name="[Mã lớp]" Member="Mã_lớp" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="[Sỉ Số]" Member="Sỉ_Số" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Mã Giáo Viên Chủ Nhiệm]" Member="Mã_Giáo_Viên_Chủ_Nhiệm" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="[Tên Giáo Viên Chủ nhiệm]" Member="Tên_Giáo_Viên_Chủ_nhiệm" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_LayLopforBangDiem" Method="st_LayLopforBangDiem">
+    <ElementType Name="st_LayLopforBangDiemResult">
+      <Column Name="malop" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="siso" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="magv" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_LayPhanCongAdmin" Method="st_LayPhanCongAdmin">
+    <ElementType Name="st_LayPhanCongAdminResult">
+      <Column Name="[Mã Môn]" Member="Mã_Môn" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="[Tên Môn]" Member="Tên_Môn" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="[Mã Giáo Viên]" Member="Mã_Giáo_Viên" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="[Tên Giáo Viên]" Member="Tên_Giáo_Viên" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Mã Lớp]" Member="Mã_Lớp" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="[Học Kỳ]" Member="Học_Kỳ" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="[Năm Học]" Member="Năm_Học" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_laythongtinbandiem" Method="st_laythongtinbandiem">
+    <Parameter Name="malop" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="hocky" Type="System.String" DbType="Char(5)" />
+    <Parameter Name="mamon" Type="System.String" DbType="Char(10)" />
+    <ElementType Name="st_laythongtinbandiemResult">
+      <Column Name="[Mã Sinh Viên]" Member="Mã_Sinh_Viên" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="[Họ tên]" Member="Họ_tên" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Điểm hệ số 1]" Member="Điểm_hệ_số_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Điểm hệ số 2]" Member="Điểm_hệ_số_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Điểm hệ số 3]" Member="Điểm_hệ_số_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Điểm trung bình]" Member="Điểm_trung_bình" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_LayThongTinGiaoVienAdmin" Method="st_LayThongTinGiaoVienAdmin">
+    <ElementType Name="st_LayThongTinGiaoVienAdminResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="magv" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="tengv" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="gioitinh" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ngaysinh" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="diachi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="quequan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="sdt" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="capbac" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="ngayvaolam" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_LaythongtinsinhvienAdmin" Method="st_LaythongtinsinhvienAdmin">
+    <ElementType Name="st_LaythongtinsinhvienAdminResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="masv" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="hoten" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="gioitinh" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ngaysinh" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="malop" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="diachi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="quequan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="sdt" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="bachoc" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="nienkhoa" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_login" Method="st_login">
+    <Parameter Name="username" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="pass" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_rpt_bangdiem" Method="st_rpt_bangdiem">
+    <ElementType Name="st_rpt_bangdiemResult">
+      <Column Name="masv" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="hoten" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="tenmon" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="diemhs1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="diemhs2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="diemhs3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="diemtb" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="hocky" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="namhoc" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_rpt_giaovien" Method="st_rpt_giaovien">
+    <ElementType Name="st_rpt_giaovienResult">
+      <Column Name="magv" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="tengv" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="gioitinh" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ngaysinh" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="gioitinh1" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="diachi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="quequan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="sdt" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="capbac" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="ngayvaolam" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_rpt_lop" Method="st_rpt_lop">
+    <ElementType Name="st_rpt_lopResult">
+      <Column Name="malop" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="siso" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="tengv" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_rpt_mon" Method="st_rpt_mon">
+    <ElementType Name="st_rpt_monResult">
+      <Column Name="mamon" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="tenmon" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_rpt_phancong" Method="st_rpt_phancong">
+    <ElementType Name="st_rpt_phancongResult">
+      <Column Name="tenmon" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="tengv" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="malop" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="hocky" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="namhoc" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_rpt_sinhvien" Method="st_rpt_sinhvien">
+    <ElementType Name="st_rpt_sinhvienResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="masv" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="hoten" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="gioitinh" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ngaysinh" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="malop" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="diachi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="quequan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="sdt" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="bachoc" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="nienkhoa" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_rpt_taikhoan" Method="st_rpt_taikhoan">
+    <ElementType Name="st_rpt_taikhoanResult">
+      <Column Name="matv" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="password1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="password2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nhom" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.st_UpdateAdminBangdiem" Method="st_UpdateAdminBangdiem">
+    <Parameter Name="masv" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="mamon" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="diemhs1" Type="System.Int32" DbType="Int" />
+    <Parameter Name="diemhs2" Type="System.Int32" DbType="Int" />
+    <Parameter Name="diemhs3" Type="System.Int32" DbType="Int" />
+    <Parameter Name="diemtb" Type="System.Double" DbType="Float" />
+    <Parameter Name="hocky" Type="System.String" DbType="Char(5)" />
+    <Parameter Name="namhoc" Type="System.String" DbType="Char(5)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_UpdateAdminBomon" Method="st_UpdateAdminBomon">
+    <Parameter Name="mamon" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="tenmon" Type="System.String" DbType="NVarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_UpdateAdminLop" Method="st_UpdateAdminLop">
+    <Parameter Name="malop" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="siso" Type="System.Int32" DbType="Int" />
+    <Parameter Name="magv" Type="System.String" DbType="NChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_UpdateAdminPhanCong" Method="st_UpdateAdminPhanCong">
+    <Parameter Name="mamon" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="magv" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="malop" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="hocky" Type="System.String" DbType="NVarChar(10)" />
+    <Parameter Name="namhoc" Type="System.String" DbType="NVarChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_UpdateAdminthongtinsinhvien" Method="st_UpdateAdminthongtinsinhvien">
+    <Parameter Name="masv" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="hoten" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="gioitinh" Type="System.String" DbType="NVarChar(10)" />
+    <Parameter Name="ngaysinh" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="malop" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="diachi" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="quequan" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="sdt" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="bachoc" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="nienkhoa" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_UpdateAdminthongtingiaovien" Method="st_UpdateAdminthongtingiaovien">
+    <Parameter Name="magv" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="tengv" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="gioitinh" Type="System.String" DbType="NVarChar(10)" />
+    <Parameter Name="ngaysinh" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="diachi" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="quequan" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="sdt" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="capbac" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="email" Type="System.String" DbType="NVarChar(40)" />
+    <Parameter Name="ngayvaolam" Type="System.DateTime" DbType="SmallDateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.st_UpdateTaiKhoan" Method="st_UpdateTaiKhoan">
+    <Parameter Name="matv" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="password1" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="password2" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="nhom" Type="System.String" DbType="NVarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

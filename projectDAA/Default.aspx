@@ -6,7 +6,7 @@
 <head runat="server">
 
     <script type="text/javascript" src="script/dropdown.js"></script>
-    <script language="javascript" type="text/javascript" src="script/MenuScript.js"></script>
+    <script type="text/javascript" src="script/MenuScript.js"></script>
     <link rel="Stylesheet" type="text/css" href="script/StyleSheet.css" />
     <script type="text/javascript">
         var bg_submenu = "#cccccc"; // màu nền của submenu

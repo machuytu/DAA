@@ -18,7 +18,7 @@
 <body>
     <form id="form1" runat="server">
         <div style="width: 1002px; margin: 10px auto 10px auto">
-            <asp:Image ID="Image8" runat="server" ImageUrl="~/image/TDC.jpg" />
+            <asp:Image ID="Image8" runat="server" ImageUrl="~/anh/banner.png" />
         </div>
         <table style="margin: 0px auto 0px auto; width: 100%;" align="left">
             <tr>
@@ -37,7 +37,7 @@
                         <tr>
                             <td style="padding: 10px; margin: 10px; font-size: 15px; color: #003399; border-bottom-color: #FFFFFF; border-bottom-style: groove;"
                                 valign="middle">
-                                <a style="text-decoration: none; color: #003399" href="Admin_ThongTinGiaoVien.aspx">
+                                <a style="text-decoration: none; color: #003399" href="Adminpage/Admin_ThongTinGiaoVien.aspx">
                                     <asp:Image ID="Image2" runat="server" Height="24px"
                                         ImageUrl="~/icon/Profile.png" Width="23px" />
                                     Thông Tin Giáo viên</a></td>

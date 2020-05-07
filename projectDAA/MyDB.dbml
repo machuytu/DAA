@@ -283,13 +283,13 @@
     <Parameter Name="magv" Type="System.String" DbType="Char(10)" />
     <Parameter Name="tengv" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="gioitinh" Type="System.String" DbType="NVarChar(10)" />
-    <Parameter Name="ngaysinh" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="ngaysinh" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="diachi" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="quequan" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="sdt" Type="System.String" DbType="NVarChar(30)" />
     <Parameter Name="capbac" Type="System.String" DbType="NVarChar(30)" />
     <Parameter Name="email" Type="System.String" DbType="NVarChar(40)" />
-    <Parameter Name="ngayvaolam" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="ngayvaolam" Type="System.String" DbType="NVarChar(50)" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.st_InsertTaiKhoan" Method="st_InsertTaiKhoan">
